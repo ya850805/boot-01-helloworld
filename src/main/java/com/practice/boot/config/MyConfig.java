@@ -1,18 +1,22 @@
 package com.practice.boot.config;
 
+import ch.qos.logback.core.db.DBHelper;
 import com.practice.boot.bean.Pet;
 import com.practice.boot.bean.User;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 /**
  * 告訴SpringBoot這是一個配置類，相當於配置文件
  * 1. 配置類裡面使用@Bean標註在方法上給容器註冊組件，默認也是單實例的
  * 2. 配置類本身也是組件
  * 3. proxyBeanMethods: 代理Bean方法(若為true(默認)，無論調用底下方法多少次，皆會拿到相同的實例)
+ * 4. @Import 給容器中自動創建這些類型的組件，默認組件的名稱就是全類名
  *
  * @author Jason
  */
+@Import({User.class, DBHelper.class})
 @Configuration(proxyBeanMethods = true)
 public class MyConfig {
 
